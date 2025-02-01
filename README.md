@@ -7,6 +7,11 @@ This is a simple API with a Get Request that returns three fields:
 
 The app is a basic Spring Application following the MVC architecture. 
 
+## API Documentation
+
+Here a link to the API Documentation on postman
+https://www.postman.com/acre-devs/hng12/folder/9b10cie/task-zero?action=share&source=copy-link&creator=24596158&ctx=documentation
+
 ## Getting started with this repository
 1. Clone the repository to your local machine:
     git clone https://github.com/your-username/java-basics.git  
