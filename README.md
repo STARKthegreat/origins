@@ -13,4 +13,4 @@ The app is a basic Spring Application following the MVC architecture.
 2. Make sure you have java 17 installed in your machine.
 3. Run the code by clicking on run in your favourite IDE.
 
-(Backlink here) [https://hng.tech/hire/java-developers]
+https://hng.tech/hire/java-developers
