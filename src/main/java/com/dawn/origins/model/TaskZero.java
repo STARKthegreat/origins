@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public record TaskZero(
         String email,
-        Instant current_date_time,
+        Instant current_datetime,
         String github_url) {
 
 }

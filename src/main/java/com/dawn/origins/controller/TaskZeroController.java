@@ -13,7 +13,7 @@ public class TaskZeroController {
     @GetMapping("/task0")
     public TaskZero taskZero() {
         return new TaskZero(
-                "EmmanuelKipropKimutai@gmail.com",
+                "emmanuelkipropkimutai@gmail.com",
                 OffsetDateTime.now().toInstant(),
                 "https://github.com/STARKthegreat/origins/");
     }
