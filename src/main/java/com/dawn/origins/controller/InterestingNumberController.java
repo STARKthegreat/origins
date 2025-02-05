@@ -112,7 +112,7 @@ public class InterestingNumberController implements ErrorController {
     @GetMapping("/api/classify-number")
     public Object classifyNumber(@RequestParam(value = "number", defaultValue = "") String numberStr) {
         try {
-            int number = Integer.parseInt(numberStr);
+            int number = Math.abs(Integer.parseInt(numberStr));
             InterestingNumber response = new InterestingNumber(
                     number,
                     isPrime(number),
