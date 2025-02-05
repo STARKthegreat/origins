@@ -105,8 +105,9 @@ public class InterestingNumberController implements ErrorController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/classify-number")
-    public InterestingNumber classifyNumber(@RequestParam(value = "number", defaultValue = "") String numberStr) {
+    public Object classifyNumber(@RequestParam(value = "number", defaultValue = "") String numberStr) {
         try {
             int number = Integer.parseInt(numberStr);
             return new InterestingNumber(
@@ -116,8 +117,9 @@ public class InterestingNumberController implements ErrorController {
                     getProperties(number),
                     getDigitSum(number),
                     getFunFact(number));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid number");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid Number" + numberStr);
+            return new InterestingNumberApiErrorResponse(numberStr, false);
         }
     }
 
