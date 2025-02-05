@@ -114,7 +114,7 @@ public class InterestingNumberController implements ErrorController {
         try {
             int number = Math.abs(Integer.parseInt(numberStr));
             InterestingNumber response = new InterestingNumber(
-                    number,
+                    Integer.parseInt(numberStr),
                     isPrime(number),
                     isPerfect(number),
                     getProperties(number),
