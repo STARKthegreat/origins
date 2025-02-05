@@ -6,8 +6,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -111,16 +113,19 @@ public class InterestingNumberController implements ErrorController {
     public Object classifyNumber(@RequestParam(value = "number", defaultValue = "") String numberStr) {
         try {
             int number = Integer.parseInt(numberStr);
-            return new InterestingNumber(
+            InterestingNumber response = new InterestingNumber(
                     number,
                     isPrime(number),
                     isPerfect(number),
                     getProperties(number),
                     getDigitSum(number),
                     getFunFact(number));
+
+            return ResponseEntity.ok(response);
         } catch (NumberFormatException e) {
             System.out.println("Invalid Number" + numberStr);
-            return new InterestingNumberApiErrorResponse(numberStr, true);
+            var response = new InterestingNumberApiErrorResponse(numberStr, true);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
