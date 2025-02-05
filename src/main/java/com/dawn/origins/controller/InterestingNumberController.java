@@ -120,7 +120,7 @@ public class InterestingNumberController implements ErrorController {
                     getFunFact(number));
         } catch (NumberFormatException e) {
             System.out.println("Invalid Number" + numberStr);
-            return new InterestingNumberApiErrorResponse(numberStr, false);
+            return new InterestingNumberApiErrorResponse(numberStr, true);
         }
     }
 
