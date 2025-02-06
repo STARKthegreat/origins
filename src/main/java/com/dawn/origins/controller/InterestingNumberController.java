@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -112,13 +111,13 @@ public class InterestingNumberController implements ErrorController {
     @GetMapping("/api/classify-number")
     public Object classifyNumber(@RequestParam(value = "number", defaultValue = "") String numberStr) {
         try {
-            int number = Math.abs(Integer.parseInt(numberStr));
+            int number = Integer.parseInt(numberStr);
             InterestingNumber response = new InterestingNumber(
                     Integer.parseInt(numberStr),
                     isPrime(number),
                     isPerfect(number),
-                    getProperties(number),
-                    getDigitSum(number),
+                    getProperties(Math.abs(number)),
+                    getDigitSum(Math.abs(number)),
                     getFunFact(number));
 
             return ResponseEntity.ok(response);
