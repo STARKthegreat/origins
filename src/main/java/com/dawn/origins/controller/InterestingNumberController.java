@@ -6,21 +6,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dawn.origins.model.InterestingNumber;
 import com.dawn.origins.model.InterestingNumberApiErrorResponse;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
-public class InterestingNumberController implements ErrorController {
+public class InterestingNumberController {
 
     private boolean isPrime(int number) {
         if (number <= 1) {
@@ -107,9 +110,14 @@ public class InterestingNumberController implements ErrorController {
         }
     }
 
+    @Operation(summary = "Get Interesting Facts about a number", description = "Returns a successful schema or an error response")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Successful Response", content = @Content(schema = @Schema(implementation = InterestingNumber.class))),
+            @ApiResponse(responseCode = "400", description = "Error Response", content = @Content(schema = @Schema(implementation = InterestingNumberApiErrorResponse.class)))
+    })
     @CrossOrigin(origins = "*")
     @GetMapping("/api/classify-number")
-    public Object classifyNumber(@RequestParam(value = "number", defaultValue = "") String numberStr) {
+    public ResponseEntity<?> classifyNumber(@RequestParam(value = "number", defaultValue = "1") String numberStr) {
         try {
             int number = Integer.parseInt(numberStr);
             InterestingNumber response = new InterestingNumber(
@@ -120,18 +128,12 @@ public class InterestingNumberController implements ErrorController {
                     getDigitSum(Math.abs(number)),
                     getFunFact(number));
 
-            return ResponseEntity.ok(response);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (NumberFormatException e) {
             System.out.println("Invalid Number" + numberStr);
             var response = new InterestingNumberApiErrorResponse(numberStr, true);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public InterestingNumberApiErrorResponse handleBadRequest(IllegalArgumentException e) {
-        return new InterestingNumberApiErrorResponse("alphabet", true);
     }
 
 }
