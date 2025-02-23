@@ -104,8 +104,7 @@ public class TelexController {
             String message = objectMapper.writeValueAsString(json);
             System.out.println(message);
             forwardToTelex(message);
-            generateAIResponse(whatsappMessage);
-            sendMessageToWhatsapp("Hello, I am a bot. How can I help you today?", recipient, previousMsgIdString);
+            sendMessageToWhatsapp(generateAIResponse(whatsappMessage), recipient, previousMsgIdString);
             System.out.println("Forwarded to Telex");
             return ResponseEntity.ok().body("Success");
         } catch (Exception e) {
