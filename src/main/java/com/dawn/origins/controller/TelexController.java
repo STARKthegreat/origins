@@ -215,51 +215,47 @@ public class TelexController {
     public ResponseEntity<?> getMethodName() {
         System.out.println("called telex config file");
         String json = """
-                {
-                  "data": {
-                    "date": {
-                      "created_at": "2025-02-20",
-                      "updated_at": "2025-02-20"
-                    },
-                    "descriptions": {
-                      "app_name": "Whatsapp Customer Support Agent",
-                      "app_description": "
-                      Automatically reply to your customers on whatsapp with this integration.
-                      \n Reply to your customers in one minute.
-                      \n Even when you're busys
-                      \n.How? AI will do the job for you!.",
-                      "app_logo": "https://lh3.googleusercontent.com/pw/AP1GczPfSJ0ewO2h17zvsr1EG3Kv_2I_Tl3Cgwb16VuYJ-eRo9sX9J7xXN4X0UpiEQsjTY_EpWH_-gjYaYdWO_JROaxEc-uxzuqCY9ZfM9yl2BzwwIoAicYNJROiI4KENYLy3V76X79ya6fEvrrxbmdAKmtS=w830-h828-s-no-gm?authuser=0",
-                      "app_url": "https://thetechhut.co/whatsapp/",
-                      "background_color": "#fff"
-                    },
-                    "is_active": true,
-                    "integration_type": "modifier",
-                    "integration_category": "CRM & Customer Support",
-                    "key_features": [
-                      "Gemini API Powered",
-                      "Auto reply to customers on Whatsapp in a minute",
-                      "Automatically get notifications of customer messages sent to whatsapp"
-                    ],
-                    "author": "Robi",
-                    "settings": [
-                        {
-                            "label": "Message",
-                            "type": "text",
-                            "required": true,
-                            "default": "Hello, I am a bot. How can I help you today?"
-                        },
-                        {
-                            "label": "Time interval",
-                            "type": "text",
-                            "required": true,
-                            "default": "* * * * *"
-                        }
-                    ],
-                    "target_url": "https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/reply-with-ai",
-                    "tick_url": "https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/reply-with-ai-tick"
-                    }
-                }
-                """;
+                                {
+                                  "data": {
+                                    "date": {
+                                      "created_at": "2025-02-20",
+                                      "updated_at": "2025-02-20"
+                                    },
+                                    "descriptions": {
+                                      "app_name": "Whatsapp Customer Support Agent",
+                                      "app_description": "Automatically reply to your customers on whatsapp with this integration.\nReply to your customers in one minute.\nEven when you're busy.\nHow? AI will do the job for you!.Testing the intergration.\n1.On your telex organisation dashboard, go to apps then click on Add New. \n2.Paste in the telex configuration url as https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/telex\n3.Connect the app and set it up to work on any channel.\n4.From whatsapp, send a message to the test number, +15550225491\n5.Send your message and watch gemini reply in minutes.\nNB: Since the whatsapp API is in test mode, it will only reply to a few test numbers. I have attached a video demo of the test number I used. You can see the intended message to the user on your telex channel however. Thanks.\nGithub link: https://github.com/STARKthegreat/whatsapp_customer_support_agent/",
+                                      "app_logo": "https://lh3.googleusercontent.com/pw/AP1GczPfSJ0ewO2h17zvsr1EG3Kv_2I_Tl3Cgwb16VuYJ-eRo9sX9J7xXN4X0UpiEQsjTY_EpWH_-gjYaYdWO_JROaxEc-uxzuqCY9ZfM9yl2BzwwIoAicYNJROiI4KENYLy3V76X79ya6fEvrrxbmdAKmtS=w830-h828-s-no-gm?authuser=0",
+                                      "app_url": "https://thetechhut.co/whatsapp/",
+                                      "background_color": "#fff"
+                                    },
+                                    "is_active": true,
+                                    "integration_type": "modifier",
+                                    "integration_category": "CRM & Customer Support",
+                                    "key_features": [
+                                      "Gemini API Powered",
+                                      "Auto reply to customers on Whatsapp in a minute",
+                                      "Automatically get notifications of customer messages sent to whatsapp"
+                                    ],
+                                    "author": "Robi",
+                                    "settings": [
+                                        {
+                                            "label": "Message",
+                                            "type": "text",
+                                            "required": true,
+                                            "default": "Hello, I am a bot. How can I help you today?"
+                                        },
+                                        {
+                                            "label": "Time interval",
+                                            "type": "text",
+                                            "required": true,
+                                            "default": "* * * * *"
+                                        }
+                                    ],
+                                    "target_url": "https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/reply-with-ai",
+                                    "tick_url": "https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/reply-with-ai-tick"
+                                    }
+                                }
+                                """;
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
