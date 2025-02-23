@@ -50,7 +50,7 @@ public class TelexController {
     private void sendMessageToWhatsapp(String message, String recipient, String previousMsgIdString) {
         // send message to whatsapp
         String access_token = System.getenv("WHATSAPP_ACCESS_TOKEN");
-        String url = "https://graph.facebook.com/v17.0/" + recipient + "/messages";
+        String url = "https://graph.facebook.com/v17.0/" + "105503482507173" + "/messages";
         WhatsappReplyMessageModel requestBody = new WhatsappReplyMessageModel(
                 "whatsapp",
                 "individual",
