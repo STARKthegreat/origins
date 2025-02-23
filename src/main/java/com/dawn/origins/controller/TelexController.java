@@ -43,7 +43,6 @@ public class TelexController {
     public ResponseEntity<?> replyWithAI(@RequestBody String requestBody) throws JsonProcessingException {
         String query = requestBody;
         System.out.println("called reply with ai" + query);
-        // generateAIResponse(query);
         return ResponseEntity.ok().body("Sucesss" + query);
     }
 
@@ -173,8 +172,9 @@ public class TelexController {
     private Boolean forwardToTelex(String requestBody) {
 
         try {
-            String apiUrl = "https://ping.telex.im/v1/webhooks/0195192d-bfc3-7fd8-b675-2d950dc37dc4";
-            URL url = new URL(apiUrl);
+            String testApiUrl = "https://ping.telex.im/v1/webhooks/0195192d-bfc3-7fd8-b675-2d950dc37dc4";
+            String prodApiUrl = "https://ping.telex.im/v1/webhooks/019532fc-8474-7d47-90f7-af3fbd86e229";
+            URL url = new URL(prodApiUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
