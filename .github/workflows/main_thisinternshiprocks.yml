@@ -24,6 +24,13 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
+      - name: Install Secrets
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            echo "##vso[task.setvariable variable=AZUREAPPSERVICE_CLIENTID_1C69D317B002493FB9094CEEA95BAC1E
+
+
       - name: Build with Maven
         run: mvn clean install
 
@@ -32,6 +39,7 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+          run: java -jar *.jar --GEMINI_API_KEY={{secrets.GEMINI_API_KEY}}
 
   deploy:
     runs-on: ubuntu-latest
