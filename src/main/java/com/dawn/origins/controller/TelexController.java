@@ -92,7 +92,6 @@ public class TelexController {
         objectMapper.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
         try {
             String apiKey = Secret.getSecret();
-            System.out.println("API Key: " + apiKey);
             String apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="
                     + apiKey;
             URL url = new URL(apiUrl);
