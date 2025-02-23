@@ -39,7 +39,7 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
-          run: java -jar *.jar --GEMINI_API_KEY={{secrets.GEMINI_API_KEY}}
+          run: java -jar ${{ github.workspace }}/target/*.jar --GEMINI_API_KEY={{secrets.GEMINI_API_KEY}}
 
   deploy:
     runs-on: ubuntu-latest
