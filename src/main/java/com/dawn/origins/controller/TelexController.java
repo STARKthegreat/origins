@@ -1,13 +1,10 @@
 package com.dawn.origins.controller;
 
 import org.springframework.web.bind.annotation.RestController;
-
-import com.Secret;
 import com.dawn.origins.model.ApiError;
 import com.dawn.origins.model.GeminiRequestBodyModel;
 import com.dawn.origins.model.GeminiResponseModel;
 import com.dawn.origins.model.TelexIntergration;
-import com.dawn.origins.model.TelexIntergrationTickerModel;
 import com.dawn.origins.model.TelexWebhookModel;
 import com.dawn.origins.model.WhatsappMessageResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
