@@ -96,13 +96,16 @@ public class TelexController {
             System.out.println(userMessage);
             String whatsappMessage = userMessage.entry().get(0).changes().get(0).value().messages().get(0).text()
                     .body();
+            String recipient = userMessage.entry().get(0).changes().get(0).value().messages().get(0).from();
+            String previousMsgIdString = userMessage.entry().get(0).changes().get(0).value().messages().get(0).id();
+
             TelexWebhookModel json = new TelexWebhookModel("whatsapp", whatsappMessage, "success",
                     "Customer Message");
             String message = objectMapper.writeValueAsString(json);
             System.out.println(message);
             forwardToTelex(message);
             generateAIResponse(whatsappMessage);
-
+            sendMessageToWhatsapp("Hello, I am a bot. How can I help you today?", recipient, previousMsgIdString);
             System.out.println("Forwarded to Telex");
             return ResponseEntity.ok().body("Success");
         } catch (Exception e) {
@@ -150,12 +153,13 @@ public class TelexController {
             }
             GeminiResponseModel responseModel = objectMapper.readValue(response.toString(), GeminiResponseModel.class);
             String geminiResponse = responseModel.candidates().get(0).content().parts().get(0).text();
-            TelexWebhookModel json = new TelexWebhookModel("Whatsapp Bot", geminiResponse, "success",
+            TelexWebhookModel json = new TelexWebhookModel("Whatsapp Bot", "AI Replied with:" + geminiResponse,
+                    "success",
                     "Customer Support Bot");
             String message = objectMapper.writeValueAsString(json);
             forwardToTelex(message);
             conn.disconnect();
-            return response.toString();
+            return geminiResponse;
 
         } catch (Exception e) {
             TelexWebhookModel json = new TelexWebhookModel("whatsapp",
