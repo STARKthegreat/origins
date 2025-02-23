@@ -218,8 +218,8 @@ public class TelexController {
                             "default": "* * * * *"
                         }
                     ],
-                    "target_url": "https://skh7r0lv-8080.euw.devtunnels.ms/reply-with-ai",
-                    "tick_url": "https://skh7r0lv-8080.euw.devtunnels.ms/reply-with-ai-tick"
+                    "target_url": "https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/reply-with-ai",
+                    "tick_url": "https://thisinternshiprocks-e8d4gycsc9gec0ht.southafricanorth-01.azurewebsites.net/reply-with-ai-tick",
                     }
                 }
                 """;
