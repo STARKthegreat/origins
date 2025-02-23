@@ -7,6 +7,7 @@ import com.dawn.origins.model.GeminiResponseModel;
 import com.dawn.origins.model.TelexIntergration;
 import com.dawn.origins.model.TelexWebhookModel;
 import com.dawn.origins.model.WhatsappMessageResponse;
+import com.dawn.origins.model.WhatsappReplyMessageModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,8 +43,40 @@ public class TelexController {
     public ResponseEntity<?> replyWithAI(@RequestBody String requestBody) throws JsonProcessingException {
         String query = requestBody;
         System.out.println("called reply with ai" + query);
-        generateAIResponse(query);
+        // generateAIResponse(query);
         return ResponseEntity.ok().body("Sucesss" + query);
+    }
+
+    private void sendMessageToWhatsapp(String message, String recipient, String previousMsgIdString) {
+        // send message to whatsapp
+        String access_token = System.getenv("WHATSAPP_ACCESS_TOKEN");
+        String url = "https://graph.facebook.com/v17.0/" + recipient + "/messages";
+        WhatsappReplyMessageModel requestBody = new WhatsappReplyMessageModel(
+                "whatsapp",
+                "individual",
+                recipient,
+                new WhatsappReplyMessageModel.Context(previousMsgIdString),
+                "text",
+                new WhatsappReplyMessageModel.Text(false, message)
+
+        );
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String json = objectMapper.writeValueAsString(requestBody);
+            System.out.println(json);
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Authorization", "Bearer " + access_token);
+            con.setDoOutput(true);
+            byte[] input = json.getBytes("utf-8");
+            con.getOutputStream().write(input, 0, input.length);
+            con.getInputStream();
+            con.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PostMapping("/reply-with-ai-tick")
@@ -69,6 +102,7 @@ public class TelexController {
             System.out.println(message);
             forwardToTelex(message);
             generateAIResponse(whatsappMessage);
+
             System.out.println("Forwarded to Telex");
             return ResponseEntity.ok().body("Success");
         } catch (Exception e) {
