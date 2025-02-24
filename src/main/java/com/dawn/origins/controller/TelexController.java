@@ -172,7 +172,8 @@ public class TelexController {
     private Boolean forwardToTelex(String requestBody) {
 
         try {
-            String testApiUrl = "https://ping.telex.im/v1/webhooks/0195192d-bfc3-7fd8-b675-2d950dc37dc4";
+            // String testApiUrl =
+            // "https://ping.telex.im/v1/webhooks/0195192d-bfc3-7fd8-b675-2d950dc37dc4";
             String prodApiUrl = "https://ping.telex.im/v1/webhooks/019532fc-8474-7d47-90f7-af3fbd86e229";
             URL url = new URL(prodApiUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
